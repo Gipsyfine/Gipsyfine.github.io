@@ -1,10 +1,10 @@
 # Azure OpenAI 
 
-â€œ*æˆ‘å¦‚ä½•æ„å»ºåƒ ChatGPT è¿™æ ·çš„ç³»ç»Ÿï¼Œä½¿ç”¨æˆ‘è‡ªå·±çš„æ•°æ®ä½œä¸ºå…¶å“åº”çš„åŸºç¡€ï¼Ÿ*â€
+¡°*ÎÒÈçºÎ¹¹½¨Ïñ ChatGPT ÕâÑùµÄÏµÍ³£¬Ê¹ÓÃÎÒ×Ô¼ºµÄÊı¾İ×÷ÎªÆäÏìÓ¦µÄ»ù´¡£¿*¡±
 
-[*Azure Cognitive Search*](https://azure.microsoft.com/en-us/products/search/) and [*Azure OpenAI Service*](https://azure.microsoft.com/en-us/products/cognitive-services/openai-service/) ç»„åˆä¸ºè¿™ç§æƒ…å†µæä¾›äº†æœ‰æ•ˆçš„è§£å†³æ–¹æ¡ˆ.
+[*Azure Cognitive Search*](https://azure.microsoft.com/en-us/products/search/) and [*Azure OpenAI Service*](https://azure.microsoft.com/en-us/products/cognitive-services/openai-service/) ×éºÏÎªÕâÖÖÇé¿öÌá¹©ÁËÓĞĞ§µÄ½â¾ö·½°¸.
 
-## çŸ¥è¯†ç‚¹
+## ÖªÊ¶µã
 
 1.[API](https://www.ibm.com/topics/api)
 
@@ -21,16 +21,3 @@
 7.[Prompt Engineering](https://github.com/Gipsyfine/Internship/blob/f20ccb22bc825644d2e0f86dae8e0c4bc9ed8c3e/Prompt%20Engineering.md#prompt-engineering)
 
 8.[Prompt Engineering Techniques](https://github.com/Gipsyfine/Internship/blob/2a7ceaa0ad3f255a772e0c8f7763a6b8af9a2972/Prompt%20Engineering%20Techniques.md)
-
-
-
-
-
-
-
-
-
-
-
-
-
