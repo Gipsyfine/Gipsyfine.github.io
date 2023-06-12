@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  
+  
+  
+  <entry>
+    <title>Azure_OpenAI</title>
+    <link href="/2023/06/12/Azure-OpenAI/"/>
+    <url>/2023/06/12/Azure-OpenAI/</url>
+    
+    <content type="html"><![CDATA[<h1 id="Azure-OpenAI"><a href="#Azure-OpenAI" class="headerlink" title="Azure OpenAI"></a>Azure OpenAI</h1><p>“<em>我如何构建像 ChatGPT 这样的系统，使用我自己的数据作为其响应的基础？</em>”</p><p><a href="https://azure.microsoft.com/en-us/products/search/"><em>Azure Cognitive Search</em></a> and <a href="https://azure.microsoft.com/en-us/products/cognitive-services/openai-service/"><em>Azure OpenAI Service</em></a> 组合为这种情况提供了有效的解决方案.</p><h2 id="知识点"><a href="#知识点" class="headerlink" title="知识点"></a>知识点</h2><p>1.<a href="https://www.ibm.com/topics/api">API</a></p><p>2.<a href="https://www.ibm.com/topics/rest-apis">REST API</a></p><p>3.<a href="https://learn.microsoft.com/zh-cn/azure/cognitive-services/openai/concepts/models">Models</a></p><p>4.<a href="https://www.techtarget.com/whatis/definition/red-teaming#:~:text=Red%20teaming%20is%20the%20practice%20of%20rigorously%20challenging,that%20uses%20strategies%20to%20encourage%20an%20outsider%20perspective.">Red teaming</a></p><p>5.<a href="https://chat.openai.com/share/d3cd4322-1ef7-4e94-82ca-0645c94d9828">LLMs</a></p><p>6.<a href="https://zh.wikipedia.org/wiki/JSON">JSON</a></p><p>7.<a href="https://github.com/Gipsyfine/Internship/blob/f20ccb22bc825644d2e0f86dae8e0c4bc9ed8c3e/Prompt%20Engineering.md#prompt-engineering">Prompt Engineering</a></p><p>8.<a href="https://github.com/Gipsyfine/Internship/blob/2a7ceaa0ad3f255a772e0c8f7763a6b8af9a2972/Prompt%20Engineering%20Techniques.md">Prompt Engineering Techniques</a></p>]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>原创</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>Hello World</title>
+    <link href="/2023/06/12/hello-world/"/>
+    <url>/2023/06/12/hello-world/</url>
+    
+    <content type="html"><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p><h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p><h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p><h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p><h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>]]></content>
+    
+    
+    
+  </entry>
+  
+  
+  
+  
+</search>
