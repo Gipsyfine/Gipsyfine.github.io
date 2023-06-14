@@ -24,7 +24,7 @@
 <meta property="og:description" content="Prompt Engineering Techniques提示工程技术。 对于 Azure OpenAI GPT 模型，目前有两个不同的 API，提示工程可以在其中发挥作用：  聊天补全 API。[Chat Completion] 补全 API。[Completion]  每种 API 要求以不同的格式输入数据，这反过来又会影响整体的提示设计。 聊天补全 API 支持 ChatGPT 和 GPT-">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2023-06-12T14:59:45.000Z">
-<meta property="article:modified_time" content="2023-06-13T06:26:56.745Z">
+<meta property="article:modified_time" content="2023-06-14T14:32:03.994Z">
 <meta property="article:author" content="Gipsyfine">
 <meta property="article:tag" content="技术">
 <meta name="twitter:card" content="summary_large_image">
@@ -225,7 +225,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          609 字
+          2.4k 字
         
       </span>
     
@@ -236,7 +236,7 @@
         
         
         
-          6 分钟
+          21 分钟
         
       </span>
     
@@ -287,7 +287,7 @@
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2023年6月13日 下午
+                    本文最后更新于：2023年6月14日 晚上
                   
                 
               </p>
@@ -295,27 +295,58 @@
             
               <div class="markdown-body">
                 
-                <h1 id="Prompt-Engineering-Techniques"><a href="#Prompt-Engineering-Techniques" class="headerlink" title="Prompt Engineering Techniques"></a>Prompt Engineering Techniques</h1><p>提示工程技术。</p>
+                <h1 id="Prompt-Engineering-Techniques"><a href="#Prompt-Engineering-Techniques" class="headerlink" title="Prompt Engineering Techniques"></a><a target="_blank" rel="noopener" href="https://learn.microsoft.com/zh-cn/azure/cognitive-services/openai/concepts/advanced-prompt-engineering?pivots=programming-language-chat-completions">Prompt Engineering Techniques</a></h1><p>提示工程技术。</p>
 <p>对于 Azure OpenAI GPT 模型，目前有两个不同的 API，提示工程可以在其中发挥作用：</p>
 <ul>
-<li>聊天补全 API。[<strong>Chat Completion</strong>]</li>
+<li><strong>聊天补全 API</strong>。[<strong>Chat Completion</strong>]</li>
 <li>补全 API。[Completion]</li>
 </ul>
 <p>每种 API 要求以不同的格式输入数据，这反过来又会影响整体的提示设计。 <strong>聊天补全 API</strong> 支持 ChatGPT 和 GPT-4 模型。 这些模型旨在接收存储在字典数组中的<a target="_blank" rel="noopener" href="https://learn.microsoft.com/zh-cn/azure/cognitive-services/openai/how-to/chatgpt">类似聊天的特定脚本</a>格式的输入。</p>
 <p>从技术上讲，ChatGPT 模型可与任一 API 一起使用，但强烈建议对这些模型使用聊天补全 API。 </p>
 <h2 id="System-message"><a href="#System-message" class="headerlink" title="System message"></a>System message</h2><p>系统消息。</p>
+<p>系统消息包含在提示的开头，用于为模型提供上下文、说明或与用例相关的其他信息。 可以使用系统消息来描述助手的个性，定义模型应回答和不应回答的内容，以及定义模型响应的格式。</p>
+<p>需要了解的一个重要细节是，即使你在系统消息中指示模型在不确定答案时回答“<strong>我不知道</strong>”，这并不能保证此请求得到履行。 设计良好的系统消息可以增加产生特定结果的可能性，但仍可能会生成不正确的响应，可能会与系统消息中的指令的意图相矛盾。</p>
 <h2 id="Few-shot-learning"><a href="#Few-shot-learning" class="headerlink" title="Few-shot learning"></a>Few-shot learning</h2><p>少样本学习。</p>
+<p>在提示中提供一组训练示例，以便为模型提供额外的上下文，用来引导模型以某种方式相应，模仿特定的行为，并为常见的问题提供种子答案。</p>
 <h2 id="Non-chat-scenarios"><a href="#Non-chat-scenarios" class="headerlink" title="Non chat scenarios"></a>Non chat scenarios</h2><p>非聊天场景。</p>
+<p>虽然<strong>聊天补全 API</strong>已优化为处理多回合对话，但它也可用于非聊天场景。 例如，对于情绪分析场景，</p>
 <h2 id="Start-with-clear-instructions"><a href="#Start-with-clear-instructions" class="headerlink" title="Start with clear instructions"></a>Start with clear instructions</h2><p>从明确的说明开始。</p>
+<p>提示中显示信息的顺序很重要。 这是因为 GPT 风格的模型是以某种方式构建的，这定义了它们处理输入的方式。在共享其他上下文信息或示例之前，在提示开始时告诉模型你希望它执行的任务有助于生成更高质量的输出。</p>
 <h2 id="Repeat-instructions-at-the-end"><a href="#Repeat-instructions-at-the-end" class="headerlink" title="Repeat instructions at the end"></a>Repeat instructions at the end</h2><p>在末尾重复指令。</p>
+<p>模型可能容易受到<strong>近因偏差</strong>的影响，在此上下文中，这意味着提示结束时的信息对输出的影响可能比提示开头的信息更大。 因此，值得尝试的是，在提示结束时重复指令，并评估对生成的响应的影响。</p>
 <h2 id="Prime-the-output"><a href="#Prime-the-output" class="headerlink" title="Prime the output"></a>Prime the output</h2><p>引导输出。</p>
+<p>这是指在提示的末尾包含几个字词或短语，以获取遵循所需形式的模型响应。 例如，使用<code>“一个可能的搜索查询是：”</code>引导模型生成单个输出。 如果没有此提示，模型将生成多个搜索查询作为输出。</p>
 <h2 id="Add-clear-syntax"><a href="#Add-clear-syntax" class="headerlink" title="Add clear syntax"></a>Add clear syntax</h2><p>添加明确的语法。</p>
+<p>对提示使用明确的语法（包括标点符号、标题和节标记）有助于传达意向，并且通常使输出更易于分析。</p>
+<p>分隔符（例如 <code>---</code>） </p>
+<p>标题或特殊变量以大写形式显示，用于区分。</p>
+<p>考虑使用 <a target="_blank" rel="noopener" href="https://markdown.com.cn/">Markdown</a> 或 <a target="_blank" rel="noopener" href="https://www.w3schools.cn/xml/default.asp">XML</a>。 这些模型已通过 Markdown 和 XML 的大量 Web 内容进行了训练，这可能会提供更好的结果。</p>
 <h2 id="Break-the-task-down"><a href="#Break-the-task-down" class="headerlink" title="Break the task down"></a>Break the task down</h2><p>分解任务。</p>
+<p>如果任务分解为较小的步骤，大型语言模型(LLM)的性能通常会更好。</p>
 <h2 id="Use-of-affordances"><a href="#Use-of-affordances" class="headerlink" title="Use of affordances"></a>Use of affordances</h2><p>使用可供性。</p>
+<p>让模型使用 <strong>affordances</strong>-<a target="_blank" rel="noopener" href="https://www.interaction-design.org/literature/topics/affordances">可供性</a>，而不是仅依赖其自身的参数来获取信息和答案。</p>
+<p>例如，<strong>搜索</strong>可以作为一种可供性来帮助减轻虚构答案的风险，并获取最新的信息。</p>
+<p>要使用可供性的方法，在模型生成文本时停止生成，并将结果从外部资源（例如搜索引擎）中获取的信息粘贴回提示中，可以按照以下步骤进行：</p>
+<ol>
+<li>提供初始提示：将问题或任务的初始提示作为输入提供给模型。</li>
+<li>生成部分文本：使用模型生成一部分文本，但在需要使用可供性时停止生成。你可以通过设置生成文本的长度或添加特殊的标记来指示停止生成。</li>
+<li>获取外部信息：将停止生成的部分文本复制，并使用外部资源（例如搜索引擎）来获取相关的信息和答案。在搜索引擎中输入部分文本，获取最新的信息和相关内容。</li>
+<li>将结果粘贴回提示中：将从外部资源获取的信息和答案粘贴回初始提示中，并将新的提示作为输入提供给模型。</li>
+<li>继续生成：使用更新后的提示作为输入，继续让模型生成接下来的文本。</li>
+</ol>
+<p>通过这种方式，模型可以利用外部资源的可供性来获取最新的信息，并将其整合到生成的文本中，从而减轻虚构答案的风险。</p>
+<p>请注意，使用可供性的方法需要注意保持生成文本的连贯性和一致性。在粘贴外部信息回提示中时，确保新的提示与之前的文本保持逻辑和语义的一致性，以便生成的文本仍然具有合理性。此外，注意使用外部资源时要遵循相应的法律、政策和道德准则。</p>
 <h2 id="Chain-of-thought-prompting"><a href="#Chain-of-thought-prompting" class="headerlink" title="Chain of thought prompting"></a>Chain of thought prompting</h2><p>思维链提示。</p>
+<p>这是<strong>分解任务</strong>技术的变体。 在这种方法中，不是将一项任务分割成较小的步骤，而是<strong>指示</strong>模型响应<em>逐步进行</em>，并提出所有涉及的步骤。 这样做可以减少结果不准确的可能性，并使评估模型响应更容易。</p>
 <h2 id="Specifying-the-output-structure"><a href="#Specifying-the-output-structure" class="headerlink" title="Specifying the output structure"></a>Specifying the output structure</h2><p>指定输出结构。</p>
+<p>使用提示指定输出结构时，可能会对结果的性质和质量产生重大影响。 有时，系统消息输入“仅写出真实事实”或“不捏造信息”可能不足以缓解问题。 相反，要求模型响应同时包含引文有助于减少错误响应的概率。</p>
 <h2 id="Temperature-and-Top-p-parameters"><a href="#Temperature-and-Top-p-parameters" class="headerlink" title="Temperature and Top_p parameters"></a>Temperature and Top_p parameters</h2><p>温度和Top_p参数。</p>
+<p>改变温度参数会改变模型的输出。 温度参数可以设置为 0 到 2。 较高的值（例如 0.7）将使输出更随机，并产生更多发散的响应，而较小的值（例如 0.2）将使输出更加集中和具体。 </p>
+<p>虚构的故事可以使用更高的温度生成。</p>
+<p> 而要生成法律文件的话，建议使用低得多的温度。</p>
+<p> Top_probability 是另一个参数，与温度类似，它也控制模型响应的随机性，但它的控制方式有所不同。 一般建议一次只更改这两个参数其中之一，而不是同时更改它们。</p>
 <h2 id="Provide-grounding-context"><a href="#Provide-grounding-context" class="headerlink" title="Provide grounding context"></a>Provide grounding context</h2><p>提供基础上下文。</p>
+<p>提供可靠答案的最有效方法之一是为模型提供数据，让它从基础数据得出响应。 如果你的用例依赖于最新、可靠的信息，且不是纯粹的创意场景，我们强烈建议提供基础数据。 通常，源材料越接近所需答案的最终形式，模型需要完成的工作就越少，这意味着出错的可能性就越小。</p>
 
                 
               </div>
@@ -359,7 +390,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>更新于</div>
-          <div>2023年6月13日</div>
+          <div>2023年6月14日</div>
         </div>
       
       
@@ -390,9 +421,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2023/06/12/Prompt%20Engineering/" title="Prompt Engineering">
+                      <a href="/2023/06/12/Method/" title="Method">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Prompt Engineering</span>
+                        <span class="hidden-mobile">Method</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -400,8 +431,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2023/06/12/Azure%20OpenAI/" title="Azure OpenAI">
-                        <span class="hidden-mobile">Azure OpenAI</span>
+                      <a href="/2023/06/12/Prompt%20Engineering/" title="Prompt Engineering">
+                        <span class="hidden-mobile">Prompt Engineering</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
