@@ -137,25 +137,6 @@
   
   
   <entry>
-    <title>Method</title>
-    <link href="/2023/06/12/Method/"/>
-    <url>/2023/06/12/Method/</url>
-    
-    <content type="html"><![CDATA[<h1 id="Method"><a href="#Method" class="headerlink" title="Method"></a>Method</h1><p><strong>create a new repository on the command line</strong></p><p>echo “# Intership” &gt;&gt; README.md<br>git init<br>git add README.md<br>git commit -m “first commit”<br>git branch -M main<br>git remote add origin <a href="https://github.com/Gipsyfine/Intership.git">https://github.com/Gipsyfine/Intership.git</a><br>git push -u origin main</p><p><strong>push an existing repository from the command line</strong></p><p>git remote add origin <a href="https://github.com/Gipsyfine/Intership.git">https://github.com/Gipsyfine/Intership.git</a><br>git branch -M main<br>git push -u origin main</p><p>1.创建SSH Key</p><figure class="highlight excel"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs excel">ssh-keygen -<span class="hljs-built_in">t</span> rsa -C <span class="hljs-string">&quot;youremail@example.com&quot;</span><br></code></pre></td></tr></table></figure><p>2.在” C:\Users\gmlea\.ssh\id_rsa.pub”将 SSH 公钥内容复制到剪贴板</p><p>3…在Github找到”Add SSH key”（添加 SSH 密钥）按钮，将新的 SSH 密钥添加到你的 GitHub 帐户。</p><p>4.在本地仓库中，使用以下命令将远程仓库的 URL 更改为 SSH 链接：</p><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs powershell">git remote <span class="hljs-built_in">set-url</span> origin git@github.com:&lt;username&gt;/&lt;repository&gt;.git<br></code></pre></td></tr></table></figure><p>将 <code>&lt;username&gt;</code> 替换为你的 GitHub 用户名，<code>&lt;repository&gt;</code> 替换为你的仓库名称。</p><p>现在，你已经将 GitHub 仓库的推送方式从 HTTPS 更改为 SSH。你可以使用 SSH 链接进行推送和拉取操作，无需提供密码或令牌。确保在进行任何推送操作之前进行测试，以确保 SSH 链接已正确配置</p><p>5.<code>git remote -v</code> 命令用于显示当前 Git 仓库的远程仓库的详细信息，包括远程仓库的 URL。它显示了远程仓库的名称和对应的 URL，以及该 URL 使用的协议（HTTPS 或 SSH）。这个命令可以帮助你确认远程仓库的配置是否正确，并查看你的本地仓库与远程仓库的关联情况。</p><p>6.<code>ssh -T git@github.com</code> 命令用于测试 SSH 连接。它尝试建立到 GitHub 的 SSH 连接，并显示连接结果。它主要用于验证你的 SSH 配置是否正确，以及是否能够成功连接到 GitHub。它不会显示与远程仓库的具体关联信息，只是测试连接状态。</p><h2 id="Powershell"><a href="#Powershell" class="headerlink" title="Powershell"></a>Powershell</h2><ol><li>在 Windows 11 高级用户菜单中：Windows Key + X键盘快捷键并选择Windows PowerShell (Admin)。</li></ol><h2 id="Hexo"><a href="#Hexo" class="headerlink" title="Hexo"></a>Hexo</h2><p><strong>本地启动</strong></p><p>cd “C:\Users\gmlea\hexo-blog”</p><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs powershell">hexo clean<br>hexo g<br>hexo s<br></code></pre></td></tr></table></figure>]]></content>
-    
-    
-    
-    <tags>
-      
-      <tag>教程</tag>
-      
-    </tags>
-    
-  </entry>
-  
-  
-  
-  <entry>
     <title>Prompt Engineering Techniques</title>
     <link href="/2023/06/12/Prompt%20Engineering%20Techniques/"/>
     <url>/2023/06/12/Prompt%20Engineering%20Techniques/</url>
@@ -167,6 +148,25 @@
     <tags>
       
       <tag>技术</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>Method</title>
+    <link href="/2023/06/12/Method/"/>
+    <url>/2023/06/12/Method/</url>
+    
+    <content type="html"><![CDATA[<h1 id="Method"><a href="#Method" class="headerlink" title="Method"></a>Method</h1><p><strong>create a new repository on the command line</strong></p><p>echo “# Intership” &gt;&gt; README.md<br>git init<br>git add README.md<br>git commit -m “first commit”<br>git branch -M main<br>git remote add origin <a href="https://github.com/Gipsyfine/Intership.git">https://github.com/Gipsyfine/Intership.git</a><br>git push -u origin main</p><p><strong>push an existing repository from the command line</strong></p><p>git remote add origin <a href="https://github.com/Gipsyfine/Intership.git">https://github.com/Gipsyfine/Intership.git</a><br>git branch -M main<br>git push -u origin main</p><p>1.创建SSH Key</p><figure class="highlight excel"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs excel">ssh-keygen -<span class="hljs-built_in">t</span> rsa -C <span class="hljs-string">&quot;youremail@example.com&quot;</span><br></code></pre></td></tr></table></figure><p>2.在” C:\Users\gmlea\.ssh\id_rsa.pub”将 SSH 公钥内容复制到剪贴板</p><p>3…在Github找到”Add SSH key”（添加 SSH 密钥）按钮，将新的 SSH 密钥添加到你的 GitHub 帐户。</p><p>4.在本地仓库中，使用以下命令将远程仓库的 URL 更改为 SSH 链接：</p><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs powershell">git remote <span class="hljs-built_in">set-url</span> origin git@github.com:&lt;username&gt;/&lt;repository&gt;.git<br></code></pre></td></tr></table></figure><p>将 <code>&lt;username&gt;</code> 替换为你的 GitHub 用户名，<code>&lt;repository&gt;</code> 替换为你的仓库名称。</p><p>现在，你已经将 GitHub 仓库的推送方式从 HTTPS 更改为 SSH。你可以使用 SSH 链接进行推送和拉取操作，无需提供密码或令牌。确保在进行任何推送操作之前进行测试，以确保 SSH 链接已正确配置</p><p>5.<code>git remote -v</code> 命令用于显示当前 Git 仓库的远程仓库的详细信息，包括远程仓库的 URL。它显示了远程仓库的名称和对应的 URL，以及该 URL 使用的协议（HTTPS 或 SSH）。这个命令可以帮助你确认远程仓库的配置是否正确，并查看你的本地仓库与远程仓库的关联情况。</p><p>6.<code>ssh -T git@github.com</code> 命令用于测试 SSH 连接。它尝试建立到 GitHub 的 SSH 连接，并显示连接结果。它主要用于验证你的 SSH 配置是否正确，以及是否能够成功连接到 GitHub。它不会显示与远程仓库的具体关联信息，只是测试连接状态。</p><h2 id="Powershell"><a href="#Powershell" class="headerlink" title="Powershell"></a>Powershell</h2><ol><li>在 Windows 11 高级用户菜单中：Windows Key + X键盘快捷键并选择Windows PowerShell (Admin)。</li></ol><h2 id="Hexo"><a href="#Hexo" class="headerlink" title="Hexo"></a>Hexo</h2><p><strong>本地启动</strong></p><p>cd “C:\Users\gmlea\hexo-blog”</p><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs powershell">hexo clean<br>hexo g<br>hexo s<br></code></pre></td></tr></table></figure>]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>教程</tag>
       
     </tags>
     
