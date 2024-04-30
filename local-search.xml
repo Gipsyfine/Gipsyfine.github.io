@@ -5,8 +5,8 @@
   
   <entry>
     <title>FastAPI性能测试</title>
-    <link href="/2024/04/29/FastAPI%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95/"/>
-    <url>/2024/04/29/FastAPI%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95/</url>
+    <link href="/blog/2024/04/29/FastAPI%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95/"/>
+    <url>/blog/2024/04/29/FastAPI%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95/</url>
     
     <content type="html"><![CDATA[<h1 id="FastAPI性能测试"><a href="#FastAPI性能测试" class="headerlink" title="FastAPI性能测试"></a>FastAPI性能测试</h1><p>性能测试</p><p>代码：</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">from</span> fastapi <span class="hljs-keyword">import</span> FastAPI<br><br>app = FastAPI()<br><br><br><span class="hljs-meta">@app.get(<span class="hljs-params"><span class="hljs-string">&quot;/&quot;</span></span>)</span><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">root</span>():<br>    <span class="hljs-keyword">return</span> &#123;<span class="hljs-string">&quot;message&quot;</span>: <span class="hljs-string">&quot;Hello World&quot;</span>&#125;<br></code></pre></td></tr></table></figure><p>结果：</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs zsh">leonelgavin@Leonel-Gavin-MacBook-Air ~ % wrk -t20 -c1000 -d30s http://127.0.0.1:8000<br>Running 30s test @ http://127.0.0.1:8000<br>  20 threads and 1000 connections<br>  Thread Stats   Avg      Stdev     Max   +/- Stdev<br>    Latency   130.29ms   24.32ms 381.62ms   81.29%<br>    Req/Sec   377.54     87.76   663.00     64.53%<br>  225601 requests in 30.07s, 32.27MB read<br>  Socket errors: connect 0, read 25036, write 34, timeout 0<br>Requests/sec:   7503.51<br>Transfer/sec:      1.07MB<br></code></pre></td></tr></table></figure><p>代码：</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">from</span> fastapi <span class="hljs-keyword">import</span> FastAPI<br><br>app = FastAPI()<br><br><br><span class="hljs-meta">@app.get(<span class="hljs-params"><span class="hljs-string">&quot;/&quot;</span></span>)</span><br><span class="hljs-keyword">async</span> <span class="hljs-keyword">def</span> <span class="hljs-title function_">root</span>():<br>    <span class="hljs-keyword">return</span> &#123;<span class="hljs-string">&quot;message&quot;</span>: <span class="hljs-string">&quot;Hello World&quot;</span>&#125;<br></code></pre></td></tr></table></figure><p>结果：</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs zsh">leonelgavin@Leonel-Gavin-MacBook-Air ~ % wrk -t20 -c1000 -d30s http://127.0.0.1:8000<br>Running 30s test @ http://127.0.0.1:8000<br>  20 threads and 1000 connections<br>  Thread Stats   Avg      Stdev     Max   +/- Stdev<br>    Latency    63.87ms   70.67ms   1.99s    99.12%<br>    Req/Sec   718.26    196.99     1.85k    73.12%<br>  429081 requests in 30.05s, 61.38MB read<br>  Socket errors: connect 0, read 6974, write 36, timeout 399<br>Requests/sec:  14278.10<br>Transfer/sec:      2.04MB<br>leonelgavin@Leonel-Gavin-MacBook-Air ~ % <br></code></pre></td></tr></table></figure><p>在本地通过<code>wrk</code>工具对FastAPI应用进行了测试。测试结果显示了在不同条件下的请求延迟、每秒请求数和数据传输速率。</p><p>第一次测试的结果显示：</p><ul><li>平均延迟为130.29毫秒。</li><li>每秒请求数为377.54。</li><li>总请求数为225601，在30.07秒内处理。</li><li>数据传输速率为1.07MB&#x2F;秒。</li></ul><p>第二次测试的结果显示：</p><ul><li>平均延迟为63.87毫秒。</li><li>每秒请求数为718.26。</li><li>总请求数为429081，在30.05秒内处理。</li><li>数据传输速率为2.04MB&#x2F;秒。</li></ul><p>可以看到，第二次测试的性能表现更好，平均延迟更低，每秒请求数更高，数据传输速率也更高。</p><p>在上述两段代码中，主要的区别在于使用了<code>async</code>关键字。<code>async def</code>定义的函数是<strong>异步函数</strong>，而不带<code>async</code>关键字的函数是<strong>同步函数</strong>。</p><p>在 Python 中，异步函数允许在等待 I&#x2F;O 操作时释放控制权，从而允许在等待期间执行其他任务。这使得异步函数在处理高并发请求时能够更有效地利用系统资源，因为它们能够同时处理多个请求而不会被一个请求的阻塞影响。相比之下，同步函数在等待 I&#x2F;O 操作时会阻塞当前线程，导致无法同时处理其他请求。</p><p>因此，使用异步函数可以提高 FastAPI 应用的性能，特别是在高并发场景下。异步函数的性能更好，因为它们能够更有效地处理请求，并且能够更好地利用系统资源。</p><p><code>async</code>是Python语言中的一个关键字，用于定义异步函数。异步函数允许在等待 I&#x2F;O 操作时释放控制权，以便执行其他任务。</p><p>FastAPI 并没有提供 <code>async</code> 这个关键字，它只是利用了 Python 中的异步特性来提供异步支持。因此，异步函数是 Python 语言自身提供的功能，而不是由 FastAPI 单独提供的。FastAPI 利用了 Python 的异步特性，使得我们可以轻松地编写异步的 Web 应用程序。</p>]]></content>
     
@@ -24,8 +24,8 @@
   
   <entry>
     <title>终端代理</title>
-    <link href="/2024/04/26/%E7%BB%88%E7%AB%AF%E4%BB%A3%E7%90%86/"/>
-    <url>/2024/04/26/%E7%BB%88%E7%AB%AF%E4%BB%A3%E7%90%86/</url>
+    <link href="/blog/2024/04/26/%E7%BB%88%E7%AB%AF%E4%BB%A3%E7%90%86/"/>
+    <url>/blog/2024/04/26/%E7%BB%88%E7%AB%AF%E4%BB%A3%E7%90%86/</url>
     
     <content type="html"><![CDATA[<h1 id="终端代理"><a href="#终端代理" class="headerlink" title="终端代理"></a>终端代理</h1><h2 id="ClashX-Pro"><a href="#ClashX-Pro" class="headerlink" title="ClashX Pro"></a>ClashX Pro</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">export</span> https_proxy=http://127.0.0.1:7890 http_proxy=http://127.0.0.1:7890 all_proxy=socks5://127.0.0.1:7890<br></code></pre></td></tr></table></figure><h2 id="V2RayX"><a href="#V2RayX" class="headerlink" title="V2RayX"></a>V2RayX</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">export</span> http_proxy=<span class="hljs-string">&quot;http://127.0.0.1:8001&quot;</span>; <span class="hljs-built_in">export</span> HTTP_PROXY=<span class="hljs-string">&quot;http://127.0.0.1:8001&quot;</span>; <span class="hljs-built_in">export</span> https_proxy=<span class="hljs-string">&quot;http://127.0.0.1:8001&quot;</span>; <span class="hljs-built_in">export</span> HTTPS_PROXY=<span class="hljs-string">&quot;http://127.0.0.1:8001&quot;</span><br></code></pre></td></tr></table></figure><h2 id="ShadowsocksX-NG"><a href="#ShadowsocksX-NG" class="headerlink" title="ShadowsocksX-NG"></a>ShadowsocksX-NG</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">export</span> http_proxy=http://127.0.0.1:1087;<span class="hljs-built_in">export</span> https_proxy=http://127.0.0.1:1087;<br></code></pre></td></tr></table></figure><h2 id="Jamjams"><a href="#Jamjams" class="headerlink" title="Jamjams"></a>Jamjams</h2><p>并未自带一键复制功能，但需要在Proxy Server中的Type设置成HTTP，再使用上面类似的命令。</p>]]></content>
     
@@ -43,10 +43,10 @@
   
   <entry>
     <title>纪念事件</title>
-    <link href="/2024/04/24/%E7%BA%AA%E5%BF%B5%E4%BA%8B%E4%BB%B6/"/>
-    <url>/2024/04/24/%E7%BA%AA%E5%BF%B5%E4%BA%8B%E4%BB%B6/</url>
+    <link href="/blog/2024/04/24/%E7%BA%AA%E5%BF%B5%E4%BA%8B%E4%BB%B6/"/>
+    <url>/blog/2024/04/24/%E7%BA%AA%E5%BF%B5%E4%BA%8B%E4%BB%B6/</url>
     
-    <content type="html"><![CDATA[<img src="/2024/04/24/%E7%BA%AA%E5%BF%B5%E4%BA%8B%E4%BB%B6/Puzzle_Break_a_Hashing_Function.jpg" class="" title="Puzzle-Break a Hashing Function"><img src="/2024/04/24/%E7%BA%AA%E5%BF%B5%E4%BA%8B%E4%BB%B6/Puzzle_Break_a_Hashing_Function.png" class="" title="Puzzle-Break a Hashing Function">]]></content>
+    <content type="html"><![CDATA[<img src="/blog/2024/04/24/%E7%BA%AA%E5%BF%B5%E4%BA%8B%E4%BB%B6/Puzzle_Break_a_Hashing_Function.jpg" class="" title="Puzzle-Break a Hashing Function"><img src="/blog/2024/04/24/%E7%BA%AA%E5%BF%B5%E4%BA%8B%E4%BB%B6/Puzzle_Break_a_Hashing_Function.png" class="" title="Puzzle-Break a Hashing Function">]]></content>
     
     
     
@@ -62,8 +62,8 @@
   
   <entry>
     <title>赞美的艺术</title>
-    <link href="/2023/06/13/%E8%B5%9E%E7%BE%8E%E7%9A%84%E8%89%BA%E6%9C%AF/"/>
-    <url>/2023/06/13/%E8%B5%9E%E7%BE%8E%E7%9A%84%E8%89%BA%E6%9C%AF/</url>
+    <link href="/blog/2023/06/13/%E8%B5%9E%E7%BE%8E%E7%9A%84%E8%89%BA%E6%9C%AF/"/>
+    <url>/blog/2023/06/13/%E8%B5%9E%E7%BE%8E%E7%9A%84%E8%89%BA%E6%9C%AF/</url>
     
     <content type="html"><![CDATA[<h1 id="赞美的艺术"><a href="#赞美的艺术" class="headerlink" title="赞美的艺术"></a>赞美的艺术</h1><p>“好看又有才华”</p><p>“站立于时代浪潮，拥有国际视野，深藏多元技能”</p><p>“adorable cuty”</p><p>“Gipsyfine big fan”</p><p>“你做了很酷的事”</p><p>“I find you attractive”</p>]]></content>
     
@@ -81,8 +81,8 @@
   
   <entry>
     <title>好的文字</title>
-    <link href="/2023/06/13/%E5%A5%BD%E7%9A%84%E6%96%87%E5%AD%97/"/>
-    <url>/2023/06/13/%E5%A5%BD%E7%9A%84%E6%96%87%E5%AD%97/</url>
+    <link href="/blog/2023/06/13/%E5%A5%BD%E7%9A%84%E6%96%87%E5%AD%97/"/>
+    <url>/blog/2023/06/13/%E5%A5%BD%E7%9A%84%E6%96%87%E5%AD%97/</url>
     
     <content type="html"><![CDATA[<h1 id="好的文字"><a href="#好的文字" class="headerlink" title="好的文字"></a>好的文字</h1><blockquote><p><strong>If the users don’t control the program, the program controls the users. With proprietary software, there is always some entity, the “owner” of the program, that controls the program and through it, exercises power over its users. A nonfree program is a yoke, an instrument of unjust power.</strong><br>如果用户不能控制程序，程序就会控制用户。通过专有软件的形式，程序的所有者总是能够获得过多的权力，不自由的软件是不公正的权力诞生的温床。                                                                               </p><p>​                                                                                            —— Richard Stallman</p></blockquote><ul><li><p>窈窕淑女君子好逑，可我在漂流。两个人的逍遥游，没熬到船到桥头。</p></li><li><p>隔着眼泪看世界，仿佛整个宇宙都在哭。</p></li><li><p>当你穿过了暴风雨，你就不再是原来那个人。                              —— 村上春树</p></li><li><p>有多深刻就有多单纯，有多单纯就有多深刻。</p></li><li><p>太阳给我生命，月亮给我诗情。</p></li><li><p>Peter Parker, if there’s one thing you are, it’s good.           ——《超凡蜘蛛侠》</p></li><li><p>也就是说，尽管抱着那张专辑去走过高中走廊的少女的身影在我脑海中仍清晰得惊人，但在漫长的岁月中，我却从未萌生过想要亲自听一听那张LP的念头。不知道为什么，我似乎没有多少兴趣去了解她抱在胸前的那张塑料碟片的凹槽里，究竟刻着怎样的旋律。</p></li><li><p>后来，我再也没有见过那位抱着《和披头士一起》LP的美丽少女。她是否仍在一九六四的那条昏暗的高中走廊里，裙裾翻飞地走着？仍然十六岁，仍然将那张印有约翰、保罗、乔治、林戈半明半暗肖像的漂亮封套郑重其事地抱在胸前。</p></li><li><p>但关于它们的回忆有时也许会走过漫漫长路，来到我身边，然后以令人难以置信的力量，撼动我的心。就像晚秋的夜风一般，卷起森林中的树叶，吹倒芒草丛生的荒原，有力地叩响家家户户的大门。</p></li><li><p>爱也许终有尽头，也许结不出美好的果实，但就算爱会消逝，就算爱不能如愿，我们仍然可以怀揣着爱过某个人的记忆。</p></li><li><p>天青色的瓷器只有在出窑的那一刻是烟雨天，它的釉色才会变成天青色，因此这种瓷器尤为珍贵，所以天青色是对烟雨的等待。</p></li><li><p>“我的花会‘昙花一现’，”小王子想，“而她只有四根刺保护自己，应付这个世界！我却抛弃了她，让她孤苦伶仃地待在我家！”</p></li><li><p>“最好在同一个时间来，”狐狸说，“例如，如果你是下午四点钟来的，从三点钟开始，我就开始感觉到幸福的滋味了。越接近四点钟，我越觉得幸福。到了四点钟，我就心神恍惚，坐立不安了。我发现了幸福的价值，但是如果你不按时来，我就不知道几点钟该装扮我的心，仪式还是需要的。”</p></li><li><p>“你们长得很美，但你们的感情世界一片空白。”小王子还对她们说。“没有人为你们而死。不错，行人会认为我的玫瑰与你们没有两样，但只有她比你们重要，因为我给她浇了水，我给她盖上花罩，我给她竖起屏风，给她避风挡雨。我为她杀死了几条毛虫（除了两三条我没杀，要让它们变成蝴蝶），我倾听她的抱怨，或她的吹嘘，有时也看着她默默无语的样子，因为她是我的玫瑰。”</p></li><li><p><a href="https://www.bilibili.com/video/BV1qL4y1g7u8?spm_id_from=333.851.b_7265636f6d6d656e64.7">人间的面，吃一碗就多一碗的滋味，见一面就多一面的回忆。</a></p></li><li><p>“一个可爱的人，很多人都会去爱的，但当ta不再像以前那么可爱，你还会去爱ta，而且愿意去发掘ta的可爱之处，那这可能就是真正的爱了，而要做到这一步就必须要有一颗宽容的心。如果爱只是一种感觉，那么当他遇到挑战，这种感觉很快就会消失。因为我们很容易在不同的人身上获得这种感觉，所以移情别恋最经常的说辞就是没有感觉了。但真正的爱并非是一种感觉，它更多的是一种责任。真正的爱一定不是瞬间的感动，而必然是一种恒久的委身，彼此牺牲彼此成就，彼此尊重。很多人为了寻找爱情，在不同的情人中，周旋探索，最终觉得自己越来越孤独，原因就在于，自恋的爱永远不能长久……”</p></li><li><p>“不畏浮云遮望眼，自缘身在最高层。”</p></li></ul>]]></content>
     
@@ -100,8 +100,8 @@
   
   <entry>
     <title>西方哲学史</title>
-    <link href="/2023/06/13/%E8%A5%BF%E6%96%B9%E5%93%B2%E5%AD%A6%E5%8F%B2%E6%91%98%E5%BD%95/"/>
-    <url>/2023/06/13/%E8%A5%BF%E6%96%B9%E5%93%B2%E5%AD%A6%E5%8F%B2%E6%91%98%E5%BD%95/</url>
+    <link href="/blog/2023/06/13/%E8%A5%BF%E6%96%B9%E5%93%B2%E5%AD%A6%E5%8F%B2%E6%91%98%E5%BD%95/"/>
+    <url>/blog/2023/06/13/%E8%A5%BF%E6%96%B9%E5%93%B2%E5%AD%A6%E5%8F%B2%E6%91%98%E5%BD%95/</url>
     
     <content type="html"><![CDATA[<h1 id="摘录"><a href="#摘录" class="headerlink" title="摘录"></a>摘录</h1><p>1.理念（原型、基本模式）是柏拉图哲学的核心。</p><p>2.死里逃生并不难，难的是逃避罪恶。</p><p>3.我去死，你们去活，我们谁的命运更好，只有神知道。</p><p>4.我们不必考虑众人对我们的评论，我们应该听从那个懂得什么是正确什么是错误的人的意见，听从真理本身。</p><p>5.错误的行动永远是不对的，以错误对错误也是不对的。</p><p>6.最智慧、最勇敢的心灵最不容易被任何外界的影响所干扰或改变。</p><p>7.过分的快乐有如过分的痛苦可以使人失态忘形。</p><p>8.正确的爱是对于美的有秩序的事物的一种有节制的和谐的爱。</p><p>9.一个未经省察的生活是不值得人过的生活。</p><p>10.政治的目的是胜利，而哲学的目的是真理。</p><p>11.哪怕泰山崩于前，他依然谈笑自若地关照着自己的灵魂，使张牙舞爪的死亡自讨没趣。</p><p>12.要想达到事物的真理，思想之路要比感觉之路更为可靠。</p><p>13.柏拉图认为，人之行为有三种根源：欲望、情感和知识。</p><p>14.世上只有三样东西具备真正的价值：正义、美和真理。</p><p>15.柏拉图最欠缺的或许是赫拉克利特的变化意识：他过于焦急地想将这个世界的活动场景凝固成一副静止的图画。</p><p>16.柏拉图明白自己的乌托邦实际上远非真的可行。他承认自己描绘了一种无法实现的情境，但他认为这种对美好愿景的描绘其实是有价值的2：人的价值就在于不断地憧憬，并努力实现憧憬的一部分；人生来就是一种创造乌托邦的动物。</p><p>17.“我们瞻前顾后，渴望并不存在的东西。”而这一切也并非全都无疾而终：我们的许多梦想都已经生根发芽，有些甚至已经开花结果。就像伊卡洛斯做的人类能够飞翔的梦一样。尽管我们只描绘了一幅画，但它可以作为我们行动的目标和标准；当更多的人看到并愿意去实现这一梦想时，乌托邦距离真正实现也就不远了。</p><p>18.我们身上总是保留着许多为我们自己所谴责的东西：就像只有相似之处才能拿来做比较，相似之人才会争吵，最剧烈的争战也往往爆发于意图或信仰之上最细微的差异。</p><p>19.过去曾经存在的东西，现在存在的东西，将来会存在的东西，全都是心灵的安排。</p><p>20.一个精神富有的人会首要寻求没有痛苦，没有烦恼的状态，追求宁静和闲暇，亦即争取过上一种安静、简朴和尽量不受骚扰的生活。</p><p>21.卓越的精神思想会导致一个人不喜欢与他人交往。</p><p>22.愚蠢的人饱受无聊之苦。</p><p>23.人们在这个世界上要么选择独处，要么选择庸俗，除此之外，再没有更多别的选择了。</p><p>24.无论如何，我们不应该从他人那里，或者从自身之外在任何方面期望太多。他人对我们所能做的只是极为有限。归根到底，每个人都孑然独立。</p><p>25.幸福属于那些自得其乐的人。 ——亚里士多德</p><p>26.没有精神思想消遣的闲暇就是死亡，它就像要把人活生生地埋葬。——塞涅卡《书信》</p><p>27.我们在这世上时日不多，不值得在可鄙的坏蛋脚下爬行。——伏尔泰</p><p>28.把他的一生献给真理。——尤维纳利斯，《讽刺诗》</p>]]></content>
     
@@ -119,8 +119,8 @@
   
   <entry>
     <title>Time Management</title>
-    <link href="/2023/06/13/Time%20Management/"/>
-    <url>/2023/06/13/Time%20Management/</url>
+    <link href="/blog/2023/06/13/Time%20Management/"/>
+    <url>/blog/2023/06/13/Time%20Management/</url>
     
     <content type="html"><![CDATA[<h1 id="Time-Management"><a href="#Time-Management" class="headerlink" title="Time Management"></a><em>Time Management</em></h1><p>每周168小时 每月720小时</p><p>“良好的时间管理不意味着总是在忙于一个又一个活动，有时,我会骑着自行车去一些地方闲逛，只是因为我喜欢悠闲地单车之旅。”</p><p>“把时间当作一种转瞬即逝的资产。”</p><p>“你不是你的思想，相反，你是在更高的层次聆听你的思想。”</p><p>“你可以采取的唯一最重要的一个步骤是学会不认同自己的思想。有时你可以对你心中的某些想法一笑了之，把它们当作少不更事的小孩子荒诞不经的恶作剧。”</p><p>“在你决定要做什么，并对其进行排序的时候，你首先要解决那些最难办的项目。”</p><p>“<strong>80%</strong> 的成就来自于<strong>20%</strong> 的行为。”</p><p>“过去的已经结束，现在(<em>present</em>)是一份礼物(<em>present</em>)。”</p>]]></content>
     
